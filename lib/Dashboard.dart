@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+
 
 import 'Constaints.dart';
 import 'NavBarDrawer.dart';
@@ -12,6 +14,28 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+
+  late List<GDPData> _chartData;
+  late TooltipBehavior _tooltipBehavior;
+
+  @override
+  void initState(){
+    _tooltipBehavior = TooltipBehavior(enable: true);
+    _chartData = getChartData();
+    super.initState();
+  }
+
+  List<GDPData> getChartData() {
+    final List<GDPData> chartData = [
+      GDPData('TENENT', 10),
+      GDPData('VACENT', 5),
+      // GDPData('S America', 2900),
+      // GDPData('Europe', 33050),
+      // GDPData('N America', 34390),
+    ];
+    return chartData;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -205,6 +229,19 @@ class _DashboardState extends State<Dashboard> {
               ReusableCard(
                 containerHeight: 300.0,
                 colour: kContainerColor,
+                cardChild: SfCircularChart(
+                  legend:  Legend(isVisible: true,overflowMode: LegendItemOverflowMode.wrap),
+                  tooltipBehavior: _tooltipBehavior,
+                  series: <CircularSeries>[
+                    PieSeries<GDPData,String>(
+                      dataSource: _chartData,
+                      xValueMapper: (GDPData data, _) => data.continent,
+                      yValueMapper: (GDPData data,_ ) => data.gdp,
+                      dataLabelSettings: DataLabelSettings(isVisible: true),
+                      enableTooltip: true,
+                    )
+                  ],
+                ),
               ),
               GestureDetector(
                 onTap: () {
@@ -220,4 +257,11 @@ class _DashboardState extends State<Dashboard> {
           ),
         ));
   }
+}
+
+class GDPData {
+  GDPData(this.continent, this.gdp);
+
+  final String continent;
+  final int gdp;
 }

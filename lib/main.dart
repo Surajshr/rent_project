@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rent_project/dummy/example.dart';
 
 import 'Dashboard.dart';
 import 'Inirial_page.dart';
