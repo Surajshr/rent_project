@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:rent_project/Tenants/previousTenantList.dart';
 
 import '../Constaints.dart';
 import '../NavBarDrawer.dart';
 import 'CurrentTenentsList.dart';
 import 'TenentsSelectionButton.dart';
 
-class CurrentTenentsWithListData extends StatefulWidget {
-  const CurrentTenentsWithListData({Key? key}) : super(key: key);
+
+class PreviousTenentsWithListData extends StatefulWidget {
+  const PreviousTenentsWithListData({Key? key}) : super(key: key);
 
   @override
-  _CurrentTenentsWithListDataState createState() => _CurrentTenentsWithListDataState();
+  _PreviousTenentsWithListDataState createState() => _PreviousTenentsWithListDataState();
 }
 
-class _CurrentTenentsWithListDataState extends State<CurrentTenentsWithListData> {
+class _PreviousTenentsWithListDataState extends State<PreviousTenentsWithListData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,10 +28,10 @@ class _CurrentTenentsWithListDataState extends State<CurrentTenentsWithListData>
       ),
       body: Container(
         child: Column(
-          children: [
+          children: const [
             CurrentTenents(),
             Expanded(child: SizedBox(height: 10.0,)),
-            SizedBox(height: 600,child:CurrentTenentList())
+            SizedBox(height: 600,child:PreviousTenentList())
           ],
         ),
       ),

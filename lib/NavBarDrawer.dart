@@ -10,18 +10,19 @@ class NavDrawer extends StatelessWidget {
     return GestureDetector(
       onTap: onChicked,
       child: Container(
-        margin: EdgeInsets.only(left: 50, bottom: 30),
+        margin: const EdgeInsets.only(left: 50, bottom: 30),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(MyIcon),
-            SizedBox(width: 20.0),
+            const SizedBox(width: 20.0),
             Text(MenueTitle,style: kSideBarTextStyle),
           ],
         ),
       ),
     );
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,7 @@ class NavDrawer extends StatelessWidget {
             ),
           ),
           SizedBox(height: 20,),
-          Divider(
+          const Divider(
             thickness: 0.2,
             color: Colors.white,
             indent: 20.0,
@@ -56,7 +57,9 @@ class NavDrawer extends StatelessWidget {
             height: 20.0,
           ),
           listMenue(
-            onChicked: () {},
+            onChicked: () {
+              Navigator.pushNamed(context, 'Dashboard');
+            },
             MenueTitle: "DASHBOARD",
             MyIcon: Icons.dashboard,
           ),
@@ -66,7 +69,9 @@ class NavDrawer extends StatelessWidget {
             MyIcon: Icons.house,
           ),
           listMenue(
-            onChicked: () {},
+            onChicked: () {
+              Navigator.pushNamed(context,"currentTenentsList");
+            },
             MenueTitle: "TENANTS",
             MyIcon: Icons.houseboat,
           ),

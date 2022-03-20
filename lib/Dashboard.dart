@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rent_project/appBarDesign.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 
@@ -40,14 +41,13 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: NavDrawer(),
-        appBar: AppBar(
-          elevation: 5.0,
-          backgroundColor: kAppBarColor,
-          title: const Center(
-            child: Text("RENTAL"),
-          ),
-          // backgroundColor: Colors.white,
-        ),
+       appBar: AppBar(
+         elevation: 5.0,
+         backgroundColor: kAppBarColor,
+         title: const Center(
+           child: Text("RENTAL"),
+         ),
+       ),
         body: SingleChildScrollView(
           child: Column(
             children: [
