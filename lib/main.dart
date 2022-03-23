@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:rent_project/dummy/example.dart';
 
 import 'Dashboard.dart';
-import 'Inirial_page.dart';
+
+import 'Invoice/InvoicePage.dart';
+import 'RentSetting/rentSetting.dart';
+import 'Tenants/AddNewTanent.dart';
 import 'Tenants/CurrentTenents.dart';
 
-import 'Tenants/TenentsSelectionButton.dart';
-import 'Tenants/previousTenant.dart';
-import 'landing_apage.dart';
-
-void main(){
+void main() {
   runApp(const RentApp());
 }
+
 class RentApp extends StatelessWidget {
   const RentApp({Key? key}) : super(key: key);
 
@@ -25,12 +24,13 @@ class RentApp extends StatelessWidget {
           color: Color(0xFF090C22),
         ),
       ),
-      initialRoute: "currentTenentsList",
+      initialRoute: "Dashboard",
       routes: {
-        '/': (context)=> CurrentTenents(),
-        'currentTenentsList': (context)=>CurrentTenentsWithListData(),
-        'previousTenantsList':(context)=>PreviousTenentsWithListData(),
-        'Dashboard': (context)=>Dashboard(),
+        'currentTenentsList': (context) => CurrentTenentsWithListData(),
+        'Dashboard': (context) => Dashboard(),
+        'invoice': (context) => Invoice(),
+        'Setting': (context) => RentalSetting(),
+        "AddNewUser":(context) => AddNewTanents(),
       },
     );
   }

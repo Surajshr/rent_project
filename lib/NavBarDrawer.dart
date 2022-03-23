@@ -64,11 +64,6 @@ class NavDrawer extends StatelessWidget {
             MyIcon: Icons.dashboard,
           ),
           listMenue(
-            onChicked: () {},
-            MenueTitle: "HOUSE",
-            MyIcon: Icons.house,
-          ),
-          listMenue(
             onChicked: () {
               Navigator.pushNamed(context,"currentTenentsList");
             },
@@ -76,17 +71,16 @@ class NavDrawer extends StatelessWidget {
             MyIcon: Icons.houseboat,
           ),
           listMenue(
-            onChicked: () {},
+            onChicked: () {
+              Navigator.pushNamed(context, 'invoice');
+            },
             MenueTitle: "INVOICE",
             MyIcon: Icons.inventory,
           ),
           listMenue(
-            onChicked: () {},
-            MenueTitle: "EXPENSES",
-            MyIcon: Icons.money,
-          ),
-          listMenue(
-            onChicked: () {},
+            onChicked: () {
+              Navigator.pushNamed(context, 'Setting');
+            },
             MenueTitle: "SETTING",
             MyIcon: Icons.settings,
           ),

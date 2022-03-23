@@ -11,6 +11,12 @@ const kSideBarTextStyle = TextStyle(
   fontFamily: "Hubballi",
   fontSize: 22,
 );
+const kBodyTextStyle = TextStyle(
+  color: Colors.white,
+  fontFamily: "Hubballi",
+  fontSize: 20,
+  fontWeight: FontWeight.bold
+);
 
 const kContainerColor = Color(0xFF111328);
 const kAppBarColor = Color(0xFF1D1E33);

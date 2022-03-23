@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rent_project/appBarDesign.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 import 'Constaints.dart';
 import 'NavBarDrawer.dart';
@@ -15,12 +14,11 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-
   late List<GDPData> _chartData;
   late TooltipBehavior _tooltipBehavior;
 
   @override
-  void initState(){
+  void initState() {
     _tooltipBehavior = TooltipBehavior(enable: true);
     _chartData = getChartData();
     super.initState();
@@ -41,13 +39,13 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: NavDrawer(),
-       appBar: AppBar(
-         elevation: 5.0,
-         backgroundColor: kAppBarColor,
-         title: const Center(
-           child: Text("RENTAL"),
-         ),
-       ),
+        appBar: AppBar(
+          elevation: 5.0,
+          backgroundColor: kAppBarColor,
+          title: const Center(
+            child: Text("RENTAL"),
+          ),
+        ),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -200,9 +198,7 @@ class _DashboardState extends State<Dashboard> {
                           Text(
                             "RENT",
                             style: kSideBarTextStyle.copyWith(
-                              fontSize: 35,
-                              fontWeight: FontWeight.bold
-                            ),
+                                fontSize: 35, fontWeight: FontWeight.bold),
                           ),
                           Container(
                             child: ListView.builder(
@@ -230,13 +226,15 @@ class _DashboardState extends State<Dashboard> {
                 containerHeight: 300.0,
                 colour: kContainerColor,
                 cardChild: SfCircularChart(
-                  legend:  Legend(isVisible: true,overflowMode: LegendItemOverflowMode.wrap),
+                  legend: Legend(
+                      isVisible: true,
+                      overflowMode: LegendItemOverflowMode.wrap),
                   tooltipBehavior: _tooltipBehavior,
                   series: <CircularSeries>[
-                    PieSeries<GDPData,String>(
+                    PieSeries<GDPData, String>(
                       dataSource: _chartData,
                       xValueMapper: (GDPData data, _) => data.continent,
-                      yValueMapper: (GDPData data,_ ) => data.gdp,
+                      yValueMapper: (GDPData data, _) => data.gdp,
                       dataLabelSettings: DataLabelSettings(isVisible: true),
                       enableTooltip: true,
                     )
