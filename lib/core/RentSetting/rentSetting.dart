@@ -147,7 +147,7 @@ class _RentalSettingState extends State<RentalSetting> {
                 style: kBodyTextStyle,
               ),
               ReusableCard(
-                containerHeight: MediaQuery.of(context).size.height * 0.15,
+                containerHeight: MediaQuery.of(context).size.height * 0.18,
                 containerWidth: MediaQuery.of(context).size.width,
                 colour: kAppBarColor,
                 cardChild: Column(

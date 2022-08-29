@@ -3,6 +3,9 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../Constaints.dart';
 import '../NavBarDrawer.dart';
+import '../routing/Routing.dart';
+import 'AddNewTanent.dart';
+import 'AddNewTanent.dart';
 import 'CurrentTenantData.dart';
 import 'PreviousTanentData.dart';
 
@@ -139,7 +142,7 @@ class _CurrentTenentsWithListDataState
             left: MediaQuery.of(context).size.width * .8,
             child: FloatingActionButton(
               onPressed: () {
-                Navigator.pushNamed(context, 'AddNewUser');
+                Navigator.of(context).pushNamed(RoutingPath.addNewTanent);
               },
               child: Icon(Icons.add),
             ),
