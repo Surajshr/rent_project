@@ -1,10 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
-import '../Dashboard.dart';
-import '../routing/Routing.dart';
+import 'package:rent_project/Dashboard.dart';
+import 'package:rent_project/common/button/custom_button.dart';
+import 'package:rent_project/common/textFirld/text_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -14,22 +13,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool _isLoading = false;
-
-  // Future<void> _googleSignIn() async{
-  //
-  //   final googleSignIn = GoogleSignIn();
-  //   try {
-  //     final googleAccount = await googleSignIn.signIn();
-  //     if (googleAccount != null) {
-  //       final googleAuth = await googleAccount.authentication;
-  //
-  //     }
-  //   }catch(e){
-  //
-  //   }
-  // }
-//
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   Future<void> signup(BuildContext context) async {
@@ -47,150 +30,155 @@ class _LoginPageState extends State<LoginPage> {
       UserCredential result = await auth.signInWithCredential(authCredential);
       User? user = result.user;
 
-      if (result != null) {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => Dashboard()));
+      if (user != null) {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const Dashboard()));
       } // if result not null we simply call the MaterialpageRoute,
       // for go to the HomePage screen
     }
   }
 
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  Future signIn() async {
+    showDialog(
+        context: context,
+        builder: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ));
+    try {
+      FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim());
+    } on FirebaseException catch (e) {
+      print(e);
+    }
+  }
+
+  final GlobalKey<FormState> _formKey = GlobalKey();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding:
-            const EdgeInsets.only(right: 20, left: 20, top: 30, bottom: 50),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 90.0),
-                child: Center(
-                  child: Text(
-                    "RENTAL System",
-                    style: TextStyle(fontSize: 45.0, fontFamily: 'Hubballi'),
-                  ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Padding(
+              padding: EdgeInsets.only(top: 90.0),
+              child: Center(
+                child: Text(
+                  "RENTAL System",
+                  style: TextStyle(fontSize: 45.0, fontFamily: 'Hubballi'),
                 ),
               ),
-              SizedBox(
-                height: 10,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const Center(
+              child: Text(
+                "Welcome to Rental!..!",
+                style: TextStyle(
+                    fontSize: 24.0,
+                    color: Colors.white,
+                    fontFamily: 'Hubballi'),
               ),
-              const Center(
+            ),
+            const SizedBox(
+              height: 10.0,
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                "Sign in",
+                style: TextStyle(
+                    fontSize: 15.0,
+                    color: Colors.white,
+                    fontFamily: 'Hubballi',
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    CustomTextField(
+                      controller: _emailController,
+                      fieldType: FieldType.email,
+                      hintText: "Email",
+                      label: "Email",
+                    ),
+                    CustomTextField(
+                      controller: _passwordController,
+                      fieldType: FieldType.password,
+                      hintText: "Password",
+                      label: "Password",
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                      child: CustomButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            signIn();
+                            print("hello");
+                          }
+                        },
+                        label: 'SignIn',
+                      ),
+                    ),
+                  ],
+                )),
+            const Padding(
+              padding: EdgeInsets.only(top: 8.0),
+              child: Center(
                 child: Text(
-                  "Welcome to Rental!..!",
+                  'or',
                   style: TextStyle(
-                      fontSize: 24.0,
-                      color: Colors.white,
-                      fontFamily: 'Hubballi'),
-                ),
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  "Sign in",
-                  style: TextStyle(
-                      fontSize: 15.0,
-                      color: Colors.white,
+                      fontSize: 20,
                       fontFamily: 'Hubballi',
+                      color: Colors.white,
                       fontWeight: FontWeight.bold),
                 ),
               ),
-              TextField(
-                decoration: InputDecoration(
-                    hintText: 'Enter your Email.',
-                    focusColor: Colors.white,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide:
-                          const BorderSide(color: Colors.white, width: 2),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide:
-                            const BorderSide(color: Colors.white, width: 2))),
-                keyboardType: TextInputType.emailAddress,
-                textInputAction: TextInputAction.done,
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 5, bottom: 20),
+              child: Divider(
+                thickness: .5,
+                indent: 20,
+                endIndent: 20,
+                color: Colors.white,
+                height: 20,
               ),
-              const SizedBox(
-                height: 25,
-              ),
-              TextField(
-                decoration: InputDecoration(
-                    hintText: 'Enter your Password.',
-                    focusColor: Colors.white,
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide:
-                          const BorderSide(color: Colors.white, width: 2),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide:
-                            const BorderSide(color: Colors.white, width: 2))),
-                keyboardType: TextInputType.emailAddress,
-                textInputAction: TextInputAction.done,
-              ),
-              const SizedBox(
-                height: 25,
-              ),
-              ElevatedButton(
-                child: const Text(
-                  'Sign in',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontFamily: 'Hubballi',
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.of(context).pushNamed(RoutingPath.dashboard);
-                },
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20), // <-- Radius
-                  ),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(top: 8.0),
-                child: Center(
-                  child: Text(
-                    'or',
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontFamily: 'Hubballi',
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(top: 5, bottom: 20),
-                child: Divider(
-                  thickness: .5,
-                  indent: 20,
-                  endIndent: 20,
-                  color: Colors.white,
-                  height: 20,
-                ),
-              ),
-              ElevatedButton(
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 20, right: 20),
+              child: ElevatedButton(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    Image(image: AssetImage("images/googleLogo.png"),),
-                    SizedBox(width: 10.0,),
-
+                    Image(
+                      image: AssetImage("images/googleLogo.png"),
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    ),
                     Text(
                       'Continue with Google',
                       style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 20,
                           fontFamily: 'Hubballi',
                           color: Colors.black),
                     ),
@@ -202,17 +190,17 @@ class _LoginPageState extends State<LoginPage> {
                 style: ElevatedButton.styleFrom(
                   primary: Color(0xf1f1f1f1),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20), // <-- Radius
+                    borderRadius: BorderRadius.circular(10), // <-- Radius
                   ),
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-            ],
-          ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+          ],
         ),
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:rent_project/Constaints.dart';
+import 'package:rent_project/Resuable_card.dart';
 
-import '../Constaints.dart';
-import '../Resuable_card.dart';
 
 class RentalSetting extends StatefulWidget {
   const RentalSetting({Key? key}) : super(key: key);
@@ -12,7 +12,7 @@ class RentalSetting extends StatefulWidget {
 
 class _RentalSettingState extends State<RentalSetting> {
   Widget listOfSetting(
-      {required IconData MyIcons, String? SettingType, Function()? onPress}) {
+      {required IconData myIcons, String? settingType, Function()? onPress}) {
     return Padding(
       padding: const EdgeInsets.only(left: 15.0, top: 15.0, bottom: 10.0),
       child: InkWell(
@@ -20,12 +20,12 @@ class _RentalSettingState extends State<RentalSetting> {
         onTap: onPress,
         child: Row(
           children: [
-            Icon(MyIcons),
+            Icon(myIcons),
             const SizedBox(
               width: 20.0,
             ),
             Text(
-              "$SettingType",
+              "$settingType",
               style: kBodyTextStyle,
             )
           ],
@@ -46,7 +46,7 @@ class _RentalSettingState extends State<RentalSetting> {
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
-          child: Icon(Icons.arrow_back),
+          child: const Icon(Icons.arrow_back),
           onTap: () {
             Navigator.pop(context);
           },
@@ -78,35 +78,35 @@ class _RentalSettingState extends State<RentalSetting> {
                 cardChild: Column(
                   children: [
                     listOfSetting(
-                      MyIcons: Icons.settings,
-                      SettingType: "General",
+                      myIcons: Icons.settings,
+                      settingType: "General",
                       onPress: () {
 
                       },
                     ),
                     customDivider(),
                     listOfSetting(
-                      MyIcons: Icons.subscriptions_rounded,
-                      SettingType: "Subscription",
+                      myIcons: Icons.subscriptions_rounded,
+                      settingType: "Subscription",
                       onPress: () {},
                     ),
                     customDivider(),
                     listOfSetting(
-                      MyIcons: Icons.help,
-                      SettingType: "Help Center",
+                      myIcons: Icons.help,
+                      settingType: "Help Center",
                       onPress: () {},
                     ),
                     customDivider(),
                     listOfSetting(
-                      MyIcons: Icons.people_alt,
-                      SettingType: "Organization",
+                      myIcons: Icons.people_alt,
+                      settingType: "Organization",
                       onPress: () {},
                     ),
                     customDivider()
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10.0,
               ),
               const Text(
@@ -120,26 +120,26 @@ class _RentalSettingState extends State<RentalSetting> {
                 cardChild: Column(
                   children: [
                     listOfSetting(
-                      MyIcons: Icons.people_alt,
-                      SettingType: "Contact Us",
+                      myIcons: Icons.people_alt,
+                      settingType: "Contact Us",
                       onPress: () {},
                     ),
                     customDivider(),
                     listOfSetting(
-                      MyIcons: Icons.facebook,
-                      SettingType: "Join Our Facebook",
+                      myIcons: Icons.facebook,
+                      settingType: "Join Our Facebook",
                       onPress: () {},
                     ),
                     customDivider(),
                     listOfSetting(
-                      MyIcons: Icons.whatsapp,
-                      SettingType: "Join Us on WhatsApp",
+                      myIcons: Icons.whatsapp,
+                      settingType: "Join Us on WhatsApp",
                       onPress: () {},
                     ),
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10.0,
               ),
               const Text(
@@ -153,14 +153,14 @@ class _RentalSettingState extends State<RentalSetting> {
                 cardChild: Column(
                   children: [
                     listOfSetting(
-                      MyIcons: Icons.share,
-                      SettingType: "Tell a Friends",
+                      myIcons: Icons.share,
+                      settingType: "Tell a Friends",
                       onPress: () {},
                     ),
                     customDivider(),
                     listOfSetting(
-                      MyIcons: Icons.star,
-                      SettingType: "Rate US",
+                      myIcons: Icons.star,
+                      settingType: "Rate US",
                       onPress: () {},
                     ),
 

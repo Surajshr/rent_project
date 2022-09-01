@@ -1,153 +1,133 @@
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:rent_project/Constaints.dart';
+import 'package:rent_project/NavBarDrawer.dart';
+import 'package:rent_project/core/constant/text_style.dart';
+import 'package:rent_project/feature/screen/Tenants/model/add_new_tenant_model.dart';
+import 'package:rent_project/feature/screen/Tenants/services/add_new_tenant_services.dart';
+import 'package:rent_project/routing/Routing.dart';
+import 'package:rent_project/routing/route_handler.dart';
+import 'dart:math' as math;
 
-import '../Constaints.dart';
-import '../NavBarDrawer.dart';
-import '../routing/Routing.dart';
-import 'AddNewTanent.dart';
-import 'AddNewTanent.dart';
-import 'CurrentTenantData.dart';
-import 'PreviousTanentData.dart';
-
-class CurrentTenentsWithListData extends StatefulWidget {
-  const CurrentTenentsWithListData({Key? key}) : super(key: key);
+class CurrentTenantsWithListData extends StatefulWidget {
+  const CurrentTenantsWithListData({Key? key}) : super(key: key);
 
   @override
-  _CurrentTenentsWithListDataState createState() =>
-      _CurrentTenentsWithListDataState();
+  _CurrentTenantsWithListDataState createState() =>
+      _CurrentTenantsWithListDataState();
 }
 
-class _CurrentTenentsWithListDataState
-    extends State<CurrentTenentsWithListData> {
-  final CurrentTanentData currentTanentData = CurrentTanentData();
-  final PreviousTanentData previousTanentData = PreviousTanentData();
-
+class _CurrentTenantsWithListDataState
+    extends State<CurrentTenantsWithListData> {
   bool isCurrent = true;
+  String? fullName;
+  String? contactNumber;
+  String? shiftedDate;
+  String? shiftedFrom;
+  String? roomTaken;
+  String? rentPerMonth;
+  String? email;
+  String? wasteFee;
+  String? electricityPerUnit;
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.pushNamed(context, RoutingPath.addNewTanent);
+        },
+      ),
       drawer: NavDrawer(),
       appBar: AppBar(
         elevation: 5.0,
         backgroundColor: kAppBarColor,
-        title: const Center(
-          child: Text("RENTAL"),
-        ),
+        title: Text("Current Tenants"),
       ),
-      body: Stack(
-        children: [
-          Positioned(
-            top: 20,
-            left: 15,
-            child: Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: StreamBuilder<List<NewTenantModel>>(
+        stream: TenantServices.readNewTenant(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text("Something went Wrong ${snapshot.hasError}"),
+            );
+          }
+          if (snapshot.hasData) {
+            final tenantData = snapshot.data!;
+            return Column(
               children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            bottomLeft: Radius.circular(20))),
-                    primary: isCurrent == true
-                        ? kButtonSelectedColor
-                        : kButtonUnselectedColor,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 50, vertical: 15),
-                    textStyle: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Hubballi'),
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      // Navigator.pushNamed(context, "currentTenentsList");
-                      isCurrent = true;
-                    });
-                  },
-                  child: Text("Current"),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text("LIST OF TENANT",style: AppTextStyle.headingTextStyle,),
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(20),
-                              bottomRight: Radius.circular(20))),
-                      primary: isCurrent == false
-                          ? kButtonSelectedColor
-                          : kButtonUnselectedColor,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 50, vertical: 15),
-                      textStyle: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Hubballi')),
-                  onPressed: () {
-                    setState(() {
-                      isCurrent = false;
-                      // Navigator.pushNamed(context, 'previousTenantsList');
-                    });
-                  },
-                  child: Text("Previous"),
+                SizedBox(
+                  height: height * .75,
+                  width: width,
+                  child: ListView.builder(
+                    itemCount: tenantData.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, RoutingPath.tenantDetailPage,
+                              arguments: AddNewTenantModel(
+                                  fullName: tenantData[index].fullName,
+                                  contactNumber: tenantData[index].contactNumber,
+                                  email: tenantData[index].email,
+                                  shiftedDate: tenantData[index].shiftedDate,
+                                  shiftedFrom: tenantData[index].shiftedFrom,
+                                  roomTaken: tenantData[index].roomTaken,
+                                  rentPerMonth: tenantData[index].rentPerMonth,
+                                  wasteFee: tenantData[index].wasteFee,
+                                  electricityPerUnit:
+                                      tenantData[index].electricityPerUnit));
+                        },
+                        child: Card(
+                          color: Colors.white12,
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              backgroundColor: Color(
+                                      (math.Random().nextDouble() * 0xFFFFFF)
+                                          .toInt())
+                                  .withOpacity(.6),
+                            ),
+                            title: Text(
+                              '${tenantData[index].fullName}',
+                              style: AppTextStyle.headingTextStyle,
+                            ),
+                            subtitle: Row(
+                              children: [
+                                const Text(
+                                  "From:",
+                                  style: AppTextStyle.boldText,
+                                ),
+                                Text(" ${tenantData[index].shiftedFrom}"),
+                                const SizedBox(
+                                  width: 20.0,
+                                ),
+                                const Text(
+                                  "Rent:",
+                                  style: AppTextStyle.boldText,
+                                ),
+                                Text(
+                                  "${tenantData[index].rentPerMonth}",
+                                  style: AppTextStyle.boldText,
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ],
-            ),
-          ),
-          Positioned(
-            top: 70,
-            left: 20,
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.7,
-              width: MediaQuery.of(context).size.width,
-              child: ListView.builder(
-                itemCount: isCurrent
-                    ? currentTanentData.ImageUrl.length.round()
-                    : previousTanentData.ImageUrl.length,
-                itemBuilder: (context, index) => ListTile(
-                  leading: CircleAvatar(
-                    radius: 30.0,
-                    backgroundImage: isCurrent
-                        ? AssetImage("${currentTanentData.ImageUrl[index]}")
-                        : AssetImage("${previousTanentData.ImageUrl[index]}"),
-                  ),
-                  trailing: Container(
-                    width: 100,
-                    child: Row(
-                      children: [
-                        IconButton(
-                          icon: Icon(Icons.call),
-                          onPressed: () {},
-                          color: Colors.white,
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.message),
-                          onPressed: () {},
-                          color: Colors.orange,
-                        ),
-                      ],
-                    ),
-                  ),
-                  title: Text(isCurrent
-                      ? currentTanentData.NamesOfPreviousTanent[index]
-                      : previousTanentData.NamesOfPreviousTanent[index]),
-                  subtitle: Text(isCurrent
-                      ? currentTanentData.StartDateOfTanent[index]
-                      : previousTanentData.StartDateOfTanent[index]),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.7,
-            left: MediaQuery.of(context).size.width * .8,
-            child: FloatingActionButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(RoutingPath.addNewTanent);
-              },
-              child: Icon(Icons.add),
-            ),
-          )
-        ],
+            );
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
       ),
     );
   }

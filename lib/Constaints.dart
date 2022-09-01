@@ -14,7 +14,7 @@ const kSideBarTextStyle = TextStyle(
 const kBodyTextStyle = TextStyle(
   color: Colors.white,
   fontFamily: "Hubballi",
-  fontSize: 20,
+  fontSize: 16,
   fontWeight: FontWeight.bold
 );
 

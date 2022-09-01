@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:rent_project/OwnerProfile/send_bill_form.dart';
-
-import '../Constaints.dart';
-import '../NavBarDrawer.dart';
-import '../Resuable_card.dart';
+import 'package:rent_project/Constaints.dart';
+import 'package:rent_project/NavBarDrawer.dart';
+import 'package:rent_project/feature/screen/OwnerProfile/send_bill_form.dart';
+import '../../../Resuable_card.dart';
 import 'detailProfile.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -171,7 +170,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             return DetailProfile();
                           } else if (selectedType == InsideProfile.sendBill) {
                             return Container(
-                              child: SendBillForm(),
+                              child: const SendBillForm(),
                             );
                           } else {
                             return Text("shrestha");

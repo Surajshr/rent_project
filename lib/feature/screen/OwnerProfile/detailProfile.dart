@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rent_project/Constaints.dart';
 
-import '../Constaints.dart';
-import 'detail_profile_model.dart';
 
 class DetailProfile extends StatefulWidget {
   const DetailProfile({Key? key}) : super(key: key);
