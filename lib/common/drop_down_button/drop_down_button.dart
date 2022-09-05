@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rent_project/core/constant/app_colors.dart';
-import 'package:rent_project/core/constant/text_style.dart';
+import 'package:rent_project/core/constant/app_text_style.dart';
 import 'package:rent_project/feature/screen/Tenants/model/add_new_tenant_model.dart';
 
 enum SelectedFieldType { country, mobileNumber }

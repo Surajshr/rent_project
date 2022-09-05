@@ -11,7 +11,7 @@ import 'package:rent_project/common/button/custom_button.dart';
 import 'package:rent_project/common/textFirld/text_field.dart';
 import 'package:rent_project/core/constant/app_colors.dart';
 import 'package:rent_project/core/constant/res_string.dart';
-import 'package:rent_project/core/constant/text_style.dart';
+import 'package:rent_project/core/constant/app_text_style.dart';
 import 'package:rent_project/feature/screen/Tenants/model/add_new_tenant_model.dart';
 import 'package:rent_project/feature/screen/Tenants/services/add_new_tenant_services.dart';
 
@@ -254,12 +254,12 @@ class _AddNewTenantsState extends State<AddNewTenants> {
       child: ListTile(
         leading: Icon(
           iconData,
-          color: AppColors.appThemeColor,
+          color: AppColors.bgColor,
         ),
         title: Text(
           label!,
           style: AppTextStyle.bodyTextStyle
-              .copyWith(color: AppColors.appThemeColor),
+              .copyWith(color: AppColors.bgColor),
         ),
       ),
       onTap: onPress,

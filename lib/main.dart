@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rent_project/common/noInternet.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:rent_project/core/LoginPage/LoginPage.dart';
+import 'package:rent_project/core/LoginPage/login_page.dart';
+import 'package:rent_project/core/constant/app_colors.dart';
 import 'package:rent_project/core/internetCheck/internet_cubit.dart';
-import 'package:rent_project/main_page.dart';
 import 'package:rent_project/routing/route_handler.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,29 +28,34 @@ class RentApp extends StatelessWidget {
       child: BlocBuilder<InternetCubit, InternetResult>(
         builder: (context, internetState) {
           return Directionality(
-            textDirection: TextDirection.ltr,
-            child: Stack(
-              children: [
-               MaterialApp(
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData.dark().copyWith(
-                scaffoldBackgroundColor: const Color(0xFF090C22),
-                appBarTheme: const AppBarTheme(
+              textDirection: TextDirection.ltr,
+              child: Stack(
+                children: [
+                  MaterialApp(
+                    debugShowCheckedModeBanner: false,
+                    theme: ThemeData(
+                      fontFamily: 'Poppins',
+                      colorScheme: Theme.of(context).colorScheme.copyWith(
+                            primary: AppColors.bgColor,
+                          ),
+                    ),
 
-                  color: Color(0xFF090C22),
-                  toolbarTextStyle: TextStyle(
-                    fontFamily: 'Hubballi'
-                  )
-                ),
-              ),
-              home: const MainPage(),
-              onGenerateRoute: RouteHandler.generateRoute,
-            ),
-
-                if(!internetState.isConnected)const NoInternet()
-          ],
-
-          ));
+                    // ThemeData.light().copyWith(
+                    //   //scaffoldBackgroundColor: const Color(0xFF090C22),
+                    //   appBarTheme: const AppBarTheme(
+                    //
+                    //     color: Color(0xFF090C22),
+                    //     toolbarTextStyle: TextStyle(
+                    //       fontFamily: 'Hubballi'
+                    //     )
+                    //   ),
+                    // ),
+                    home: const NewLoginPage(),
+                    onGenerateRoute: RouteHandler.generateRoute,
+                  ),
+                  if (!internetState.isConnected) const NoInternet()
+                ],
+              ));
         },
       ),
     );

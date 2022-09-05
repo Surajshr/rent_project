@@ -18,4 +18,16 @@ class ResString{
   static const fromCamera ="From Camera";
   static const fromGallery ="From Gallery";
   static const searchTenant="Search Tenant";
+
+
+
+  //Login Page
+
+static const welcomeTitle = "RENT IT OUT";
+static const welcomeMessage ="Calculate your rent & connect with your tenant easily";
+static const getStarted =" GET STARTED";
+
+
+static const login =" Login";
+static const haveAccount="Already have an account?";
 }

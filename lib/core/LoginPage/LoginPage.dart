@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rent_project/Dashboard.dart';
 import 'package:rent_project/common/button/custom_button.dart';
 import 'package:rent_project/common/textFirld/text_field.dart';
+import 'package:rent_project/core/constant/image_constant.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -138,6 +139,17 @@ class _LoginPageState extends State<LoginPage> {
                         label: 'SignIn',
                       ),
                     ),
+                    SizedBox(height: 15.0,),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 100.0),
+                      child: Row(
+                        children: [
+                          Text("Don't have accouny? "),
+                          Text("Sign up",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),)
+                        ],
+                      ),
+                    )
+                    
                   ],
                 )),
             const Padding(
@@ -170,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     Image(
-                      image: AssetImage("images/googleLogo.png"),
+                      image: AssetImage(ImageConstant.google),
                     ),
                     SizedBox(
                       width: 10.0,

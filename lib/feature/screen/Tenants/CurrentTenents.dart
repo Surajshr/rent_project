@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rent_project/Constaints.dart';
 import 'package:rent_project/NavBarDrawer.dart';
-import 'package:rent_project/core/constant/text_style.dart';
+import 'package:rent_project/core/constant/app_text_style.dart';
 import 'package:rent_project/feature/screen/Tenants/model/add_new_tenant_model.dart';
 import 'package:rent_project/feature/screen/Tenants/services/add_new_tenant_services.dart';
 import 'package:rent_project/routing/Routing.dart';

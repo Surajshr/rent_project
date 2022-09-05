@@ -15,7 +15,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<InternetCubit, InternetResult>(
-      builder: (context, internetstate) {
+      builder: (context, internetState) {
         return SizedBox(
           height: 55,
           width: width ?? MediaQuery.of(context).size.width,
@@ -25,12 +25,12 @@ class CustomButton extends StatelessWidget {
                   backgroundColor: MaterialStateProperty.all(color),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
+                        borderRadius: BorderRadius.circular(18.0),
                       ))),
-              onPressed: internetstate.isConnected ? onPressed : null,
+              onPressed: internetState.isConnected ? onPressed : null,
               child: Text(
                 label,
-                style: const TextStyle(color: Colors.white, fontSize: 26, fontFamily: 'Hubballi',),
+                style: const TextStyle(color: Colors.white, fontSize: 16, fontFamily: 'Poppins',),
               )),
         );
       },

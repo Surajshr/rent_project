@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rent_project/core/constant/text_style.dart';
+import 'package:rent_project/core/constant/app_text_style.dart';
 
 class TenantDetailPage extends StatelessWidget {
   String? fullName;

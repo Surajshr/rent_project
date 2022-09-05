@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:printing/printing.dart';
 import 'package:rent_project/common/button/custom_button.dart';
-import 'package:rent_project/core/constant/text_style.dart';
+import 'package:rent_project/core/constant/app_text_style.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
