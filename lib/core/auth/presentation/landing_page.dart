@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rent_project/common/base_page/base_page.dart';
 import 'package:rent_project/common/button/custom_button.dart';
 import 'package:rent_project/common/widget/member_conformation.dart';
 import 'package:rent_project/core/constant/app_colors.dart';
@@ -7,22 +8,23 @@ import 'package:rent_project/core/constant/image_constant.dart';
 import 'package:rent_project/core/constant/res_string.dart';
 import 'package:rent_project/helper/space.dart';
 import 'package:rent_project/localization.dart';
+import 'package:rent_project/routing/Routing.dart';
 import 'package:rent_project/utils/image_utils.dart';
 
-class NewLoginPage extends StatefulWidget {
-  const NewLoginPage({Key? key}) : super(key: key);
+class LandingPage extends StatefulWidget {
+  const LandingPage({Key? key}) : super(key: key);
 
   @override
-  State<NewLoginPage> createState() => _NewLoginPageState();
+  State<LandingPage> createState() => _LandingPageState();
 }
 
-class _NewLoginPageState extends State<NewLoginPage> {
+class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
 
-    return Scaffold(
-      backgroundColor: AppColors.bgColor,
+    return BasePage(
+    showAppBar: false,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -31,7 +33,7 @@ class _NewLoginPageState extends State<NewLoginPage> {
             children: [
               Center(
                 child: ImageUtils.localImage(
-                    imgSource: ImageConstant.login, height: 300, width: 300),
+                    imgSource: ImageConstant.landingPageImage, height: 300, width: 300),
               ),
               Text(
                 getLocalizedString(
@@ -47,8 +49,17 @@ class _NewLoginPageState extends State<NewLoginPage> {
               CustomButton(
                   width: 200,
                   color: AppColors.appThemeColor,
-                  label: ResString.getStarted,
-                  onPressed: () {}),
+                  label: ResString.owner,
+                  onPressed: () {
+                    Navigator.pushNamed(context, RoutingPath.loginPage);
+                  }),
+              CustomButton(
+                  width: 200,
+                  color: AppColors.appThemeColor,
+                  label: ResString.tenant,
+                  onPressed: () {
+                    Navigator.pushNamed(context, "");
+                  }),
               space(
                 height: height * .05,
               ),

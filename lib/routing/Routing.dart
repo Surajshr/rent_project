@@ -12,4 +12,9 @@ class RoutingPath{
  static const tenantDetailPage='/tenantDetailPage';
  static const listOfTenant="/listOfTenant";
  static const generatedBill= "/GeneratedBill";
+ static const loginPage='/presentation';
+ static const register='/Register';
+ static const dashboardPage='/dashboard';
+ static const logOut='/logout';
+
 }

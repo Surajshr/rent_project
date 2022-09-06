@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:rent_project/core/constant/app_colors.dart';
 
 enum FieldType {
   password,
@@ -54,7 +55,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
         validator: (value) {
           return checkValidation(value);
         },
-
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: widget.controller,
         obscureText:
@@ -63,13 +63,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
         readOnly: widget.fieldType == FieldType.tenant ? true : false,
         decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.white,
-          labelStyle: const TextStyle(
-            color: Colors.black
-          ),
-          hintStyle: const TextStyle(
-              color: Colors.black54
-          ),
+          fillColor: AppColors.shadowColor,
+          labelStyle: const TextStyle(color: Colors.black),
+          hintStyle: const TextStyle(color: Colors.black54),
           suffixIcon: widget.fieldType == FieldType.password
               ? IconButton(
                   icon: Icon(widget.isObscure
@@ -82,7 +78,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   },
                 )
               : null,
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: const BorderSide(color: AppColors.appThemeColor)),
+          contentPadding:
+              const EdgeInsets.only(left: 15, bottom: 16, top: 16, right: 15),
+
           prefixIcon: widget.prefixIcon,
           //labelText: widget.labelText,
           hintText: widget.hintText,

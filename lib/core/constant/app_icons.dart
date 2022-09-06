@@ -7,4 +7,14 @@ class AppIcons{
 
   static const search = Icon(Icons.search,color: AppColors.bgColor,);
 
+  static const backButton = Icon(Icons.arrow_back);
+
+  static const emailIcon = Icon(Icons.email);
+  static const passwordIcon= Icon(Icons.lock);
+
+  static const menu =Icon(Icons.menu);
+  static const dashboard=Icon(Icons.dashboard);
+
+  static const defaultIcon=Icon(Icons.disabled_by_default);
+
 }

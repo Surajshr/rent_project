@@ -8,16 +8,16 @@ import 'package:rent_project/routing/Routing.dart';
 import 'package:rent_project/routing/route_handler.dart';
 import 'dart:math' as math;
 
-class CurrentTenantsWithListData extends StatefulWidget {
-  const CurrentTenantsWithListData({Key? key}) : super(key: key);
+class TenantList extends StatefulWidget {
+  const TenantList({Key? key}) : super(key: key);
 
   @override
-  _CurrentTenantsWithListDataState createState() =>
-      _CurrentTenantsWithListDataState();
+  _TenantListState createState() =>
+      _TenantListState();
 }
 
-class _CurrentTenantsWithListDataState
-    extends State<CurrentTenantsWithListData> {
+class _TenantListState
+    extends State<TenantList> {
   bool isCurrent = true;
   String? fullName;
   String? contactNumber;

@@ -11,7 +11,7 @@ import 'dart:math' as math;
 
 import 'package:rent_project/routing/route_handler.dart';
 
-import '../Tenants/AddNewTanent.dart';
+import '../Tenants/add_new_tenant.dart';
 
 
 class ListOfTenant extends StatefulWidget {

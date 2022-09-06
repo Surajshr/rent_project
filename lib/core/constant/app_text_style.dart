@@ -29,4 +29,13 @@ class AppTextStyle {
     fontWeight: FontWeight.bold,
     color: AppColors.appThemeColor
   );
+  static const headerStyle =TextStyle(
+      color: AppColors.bgColor,
+      fontSize: 20,
+      fontWeight: FontWeight.bold);
+  static const TextStyle title = TextStyle(
+    fontSize: 18,
+    color: AppColors.appThemeColor,
+    fontWeight: FontWeight.bold,
+  );
 }

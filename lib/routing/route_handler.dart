@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:rent_project/core/LoginPage/LoginPage.dart';
+import 'package:rent_project/core/auth/presentation/login_page.dart';
+import 'package:rent_project/core/auth/presentation/register_page.dart';
 import 'package:rent_project/feature/screen/Invoice/InvoicePage.dart';
 import 'package:rent_project/feature/screen/Invoice/generated_invoice.dart';
 import 'package:rent_project/feature/screen/Invoice/list_of_tenant.dart';
 import 'package:rent_project/feature/screen/OwnerProfile/profile.dart';
-import 'package:rent_project/feature/screen/Tenants/AddNewTanent.dart';
-import 'package:rent_project/feature/screen/Tenants/CurrentTenents.dart';
+import 'package:rent_project/feature/screen/Tenants/add_new_tenant.dart';
+import 'package:rent_project/feature/screen/Tenants/tenant_list.dart';
 import 'package:rent_project/feature/screen/Tenants/tenant_detail_page.dart';
+import 'package:rent_project/feature/screen/dashboard/dashboard_fragment.dart';
+import 'package:rent_project/helper/show_error_page.dart';
 
 import '../Dashboard.dart';
 import '../core/RentSetting/rentSetting.dart';
@@ -16,10 +19,8 @@ class RouteHandler {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
-      case RoutingPath.login:
-        return MaterialPageRoute(builder: (_) => LoginPage());
-      case RoutingPath.dashboard:
-        return MaterialPageRoute(builder: (_) => Dashboard());
+      case RoutingPath.dashboardPage:
+        return MaterialPageRoute(builder: (_) => DashboardFragment());
       case RoutingPath.invoice:
         return MaterialPageRoute(builder: (_) => Invoice());
       case RoutingPath.ownerProfile:
@@ -27,7 +28,7 @@ class RouteHandler {
       case RoutingPath.setting:
         return MaterialPageRoute(builder: (_) => RentalSetting());
       case RoutingPath.currentTenant:
-        return MaterialPageRoute(builder: (_) => CurrentTenantsWithListData());
+        return MaterialPageRoute(builder: (_) => TenantList());
       case RoutingPath.tenantDetailPage:
         final newTenantData = args as AddNewTenantModel;
         return MaterialPageRoute(
@@ -45,8 +46,10 @@ class RouteHandler {
 
       case RoutingPath.addNewTanent:
         return MaterialPageRoute(builder: (_) => AddNewTenants());
+      case RoutingPath.loginPage:
+        return MaterialPageRoute(builder: (_) =>  NewLoginPage());
       case RoutingPath.listOfTenant:
-        return MaterialPageRoute(builder: (_) => ListOfTenant());
+        return MaterialPageRoute(builder: (_) =>  ListOfTenant());
       case RoutingPath.generatedBill:
         final billData = args as GeneratedBillModel;
         return MaterialPageRoute(
@@ -65,6 +68,8 @@ class RouteHandler {
               remainingRent: billData.remainingRent,
 
                 ));
+      case RoutingPath.register:
+        return MaterialPageRoute(builder: (_) => RegisterPage());
       default:
         return _errorMessage();
     }
@@ -72,14 +77,7 @@ class RouteHandler {
 
   static Route<dynamic> _errorMessage() {
     return MaterialPageRoute(builder: (_) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text("ERROR"),
-        ),
-        body: const Center(
-          child: Text("ERROR"),
-        ),
-      );
+      return const ShowErrorPage();
     });
   }
 }
